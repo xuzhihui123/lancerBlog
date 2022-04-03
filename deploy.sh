@@ -12,7 +12,7 @@ yarn docs:build
 # 如果是发布到自定义域名
 # echo 'www.example.com' > CNAME
 
-git add -A
+git add .
 git commit -m 'deploy'
 
 # 下面是git的ssh仓库地址
