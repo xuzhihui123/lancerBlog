@@ -1,7 +1,7 @@
 module.exports = {
   title: 'lancer博客首页', // 显示在左上角的网页名称以及首页在浏览器标签显示的title名称
   description: 'lancer的前端学习记录', // meta 中的描述文字，用于SEO
-  base:'/my-blog/',
+  base:'/lancerBlog/',
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
     ['link',
