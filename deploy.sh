@@ -12,10 +12,11 @@ yarn docs:build
 # 如果是发布到自定义域名
 # echo 'www.example.com' > CNAME
 
+git init
 git add .
-git commit -m 'deploy'
-
-# 下面是git的ssh仓库地址
-git push -f git@gitee.com:itlancer/my-blog.git main
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/xuzhihui123/my-blog.git
+git push -u origin main
 
 cd -
