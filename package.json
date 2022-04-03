@@ -1,0 +1,15 @@
+{
+  "name": "study-blog",
+  "version": "1.0.0",
+  "description": "一个学习的博客",
+  "main": "index.js",
+  "author": "lancer",
+  "license": "MIT",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "vuepress": "^1.9.7"
+  }
+}
