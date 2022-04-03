@@ -16,6 +16,6 @@ git add -A
 git commit -m 'deploy'
 
 # 下面是git的ssh仓库地址
-git push -f git@gitee.com:itlancer/my-blog.git 
+git push -f git@gitee.com:itlancer/my-blog.git master
 
 cd -
