@@ -21,7 +21,6 @@ jobs:
       run: |
         yarn install
         yarn docs:build 
-      run:
     # 发布
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
