@@ -1,5 +1,4 @@
-- Index.js 
-
+- Index.js
 
 ```js
 import React from './source/createElement.js';
@@ -23,3 +22,101 @@ console.log(JSON.stringify(element,null,2));
 ReactDOM.render(element,document.getElementById('app'))
 
 ```
+
+- createElement.js
+
+  ```js
+  
+  function createElement(type,config,children){
+    if(config){
+      delete config.__source
+      delete config.__self
+    }
+    
+    let props = {...config}
+  
+    if(arguments.length > 3){
+      children = Array.prototype.slice.call(arguments,2)
+    }
+    props.children = children
+  
+    return {
+      type,
+      props
+    }
+  }
+  
+  
+  const React = {
+    createElement
+  }
+  
+  export default React
+  ```
+
+- react-dom.js
+
+  ```js
+  
+  
+  function render(vdom,container){
+    const dom = createDOM(vdom)
+    container.appendChild(dom)
+  }
+  
+  
+  function createDOM(vdom){
+    if(typeof vdom === 'string' || typeof vdom==='number'){
+      return document.createTextNode(vdom)
+    }
+    let {type,props} = vdom
+    let dom =  document.createElement(type)
+    updateProps(dom,props)
+    if(typeof props.children === 'string' || typeof props.children === 'number'){
+      dom.textContent = props.children
+      // 儿子是数组
+    }else if(Array.isArray(props.children)){
+        reconcileChildren(props.children,dom)
+      // 如果只有一个儿子
+    }else if(typeof props.children === 'object' && props.children.type){
+      render(props.children,dom)
+    }
+    return dom
+  }
+  /**
+   * 
+   * @param {*} childrenVdom  儿子虚拟dom数组
+   * @param {*} parentDom  父亲dom
+   */
+  function reconcileChildren(childrenVdom,parentDom){
+    for(let i=0;i<childrenVdom.length;i++){
+      render(childrenVdom[i],parentDom)
+    }
+  }
+  
+  /**
+   * 
+   * @param {*} dom  真实dom
+   * @param {*} newProps  新属性
+   */
+  function updateProps(dom,newProps){
+    for (const key in newProps) {
+      if(key === 'children') continue;
+      if(key === 'style'){
+        let styleObj = newProps[key]
+        for(let attr in styleObj){
+          dom.style[attr] = styleObj[attr]
+        }
+      }else{
+        dom[key] = newProps[key]
+      }
+    }
+  }
+  
+  
+  const ReactDOM = {
+    render
+  }
+  
+  export default ReactDOM
+  ```
