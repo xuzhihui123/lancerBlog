@@ -1,7 +1,7 @@
 module.exports = {
   title: 'lancer博客首页', // 显示在左上角的网页名称以及首页在浏览器标签显示的title名称
   description: 'lancer的前端学习记录', // meta 中的描述文字，用于SEO
-  base:'/lancerBlog/',
+  base:'/lancerBlog/', // 这边和github的仓库名对应上了
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
     ['link',
@@ -14,7 +14,7 @@ module.exports = {
   },
   themeConfig: {
     logo: '/home.png',
-    lastUpdated: 'Last Updated', // string | boolean 最后更新时间
+    lastUpdated: '上次更新', // string | boolean 最后更新时间
     smoothScroll: true,
     nav: [   // 顶部导航栏
       { text: '首页', link: '/' },
