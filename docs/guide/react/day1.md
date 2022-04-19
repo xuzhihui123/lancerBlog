@@ -1,16 +1,11 @@
-- Index.js
-
+## 1、index.js
 ```js
 import React from './source/createElement.js';
 import ReactDOM from './source/react-dom';
 
-
-
 // jsx编译成React.createElement是在webpack中执行的
 let element = <h1 className={'aaa'} style={{color:'red'}}>hello world</h1>
 // React.createElement("h1", null, "hello world");
-
-
 // element就是vnode
 console.log(element);
 console.log(JSON.stringify(element,null,2));
@@ -22,10 +17,8 @@ console.log(JSON.stringify(element,null,2));
 ReactDOM.render(element,document.getElementById('app'))
 
 ```
-
-- createElement.js
-
-  ```js
+## 2、createElement.js
+```js
   
   function createElement(type,config,children){
     if(config){
@@ -54,10 +47,9 @@ ReactDOM.render(element,document.getElementById('app'))
   export default React
   ```
 
-- react-dom.js
-
+  ## 3、react-dom.js
+   
   ```js
-  
   
   function render(vdom,container){
     const dom = createDOM(vdom)
@@ -120,3 +112,4 @@ ReactDOM.render(element,document.getElementById('app'))
   
   export default ReactDOM
   ```
+

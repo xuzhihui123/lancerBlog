@@ -15,6 +15,7 @@ module.exports = {
   themeConfig: {
     logo: '/home.png',
     lastUpdated: '上次更新', // string | boolean 最后更新时间
+    sidebarDepth:2, // 设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级，2为提取二级标题和三级标题
     smoothScroll: true,
     nav: [   // 顶部导航栏
       { text: '首页', link: '/' },
@@ -37,7 +38,7 @@ module.exports = {
           path:'/guide/react/'
         },
         {
-          title: '1、手写React.createElement  ReactDOM.render',
+          title: '手写React.createElement、ReactDOM.render',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path:'day1'
         }
