@@ -43,9 +43,14 @@ module.exports = {
           path:'day1'
         },
         {
-          title: '函数式组件',
+          title: '实现函数式组件',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path:'day2'
+        },
+        {
+          title: '实现类组件',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path:'day3'
         }
       ],
       '/guide/vue/': [
