@@ -32,7 +32,7 @@ module.exports = {
     sidebar: {
       '/guide/react/': [
         {
-          title: 'React学习部分开始',   // 一级菜单名称
+          title: '1、React学习部分开始',   // 一级菜单名称
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           // sidebarDepth: 1,    //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
           // children: [
@@ -44,22 +44,22 @@ module.exports = {
           path: '/guide/react/'
         },
         {
-          title: '手写React.createElement、ReactDOM.render',
+          title: '2、手写React.createElement、ReactDOM.render',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'day1'
         },
         {
-          title: '实现函数式组件',
+          title: '3、实现函数式组件',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'day2'
         },
         {
-          title: '实现类组件',
+          title: '4、实现类组件',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'day3'
         },
         {
-          title: '合成事件和批量更新',
+          title: '5、合成事件和批量更新',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'day4'
         }
@@ -92,7 +92,7 @@ module.exports = {
           path: '/guide/css/'
         },
         {
-          title: 'BFC问题',
+          title: '1、BFC问题',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'css1'
         },

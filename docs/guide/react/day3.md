@@ -1,4 +1,4 @@
-## 1、index.js
+## 4.1、index.js
 
  * 类组件
  * 可以在构造函数里，并且只能在构造函数中给this.state赋值
@@ -47,7 +47,7 @@ class Counter extends React.Component{
 ReactDOM.render(<Counter name={'lancer'}/>,document.getElementById('app'))
 
 ```
-## 2、createElement.js
+## 4.2、createElement.js
 
 这边需要导入Component类方便类组件继承
 
@@ -82,7 +82,7 @@ const React = {
 
 export default React
 ```
-  ## 3、react-dom.js
+  ## 4.3、react-dom.js
 
 在创建真实dom的时候根据createDOM方法判断type.isReactComponent是否为类组件，如果是类组件，调用mountClassComponent方法，并且创建类组件实例，传入props，调用实例的render方法返回虚拟dom，在递归调用createDOM生成真实dom，实例上记录真实dom属性方便后期更新组件classInstance.dom = dom
 
@@ -203,7 +203,7 @@ export default React
   export default ReactDOM
   ```
 
-## 4、Component.js
+## 4.4、Component.js
 
 index.js中调用setState方法，更新state状态，此时需要重新调用render方法生成新的虚拟dom，然后调用updateClassComponent更新组件（此时还没有做diff，后续会完善代码）
 

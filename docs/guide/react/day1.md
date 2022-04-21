@@ -1,4 +1,4 @@
-## 1、index.js
+## 2.1、index.js
 
 - 像**element**变量底层经过babel转译成React.createElement()函数，React.createElement()函数执行生成虚拟dom 。这边需要导入React库也是为了使用*React.createElement*函数。
 
@@ -22,7 +22,7 @@ console.log(JSON.stringify(element,null,2));
 ReactDOM.render(element,document.getElementById('app'))
 
 ```
-## 2、createElement.js
+## 2.2、createElement.js
 
 初步手写成这样生成虚拟dom树，此时的children可能是数组也可能是基本类型
 
@@ -54,7 +54,7 @@ ReactDOM.render(element,document.getElementById('app'))
   
   export default React
 ```
-  ## 3、react-dom.js
+  ## 2.3、react-dom.js
 
 初步写成这样，后续还会更新，render其实就是将虚拟dom转换为真实dom。updateProps为更新dom上的属性
 

@@ -1,4 +1,4 @@
-##  一、setState用法
+##  5.1、setState用法
 
  * 合成事件和批量更新
  * 在react中，事件的更新是异步的，是批量的，不是同步的
@@ -101,7 +101,7 @@ ReactDOM.render(<Counter name={'lancer'} />, document.getElementById('app'))
   }
 ```
 
-## 二、原理
+## 5.2、原理
 
 首先在创建组件Counter实例的时候会继承Component类，**Component**类里面会实现一个**Updater**更新器（在Component.js中），
 
@@ -109,7 +109,7 @@ ReactDOM.render(<Counter name={'lancer'} />, document.getElementById('app'))
 
 并且对事件做了合成，也就是包了一层，调用**addEvent**方法，绑定事件的同时先设置**updateQueue.isBatchingUpdate**为批量更新，当事件执行完后，此时的state和回调也都保存在当前**updater**更新器实例中，在调用**updateQueue.batchUpdater**方法批量更新）
 
-### 1、index.js
+### 5.2.1、index.js
 
 ```js
 import React from './source/createElement';
@@ -160,7 +160,7 @@ class Counter extends React.Component {
 ReactDOM.render(<Counter name={'lancer'} />, document.getElementById('app'))
 ```
 
-### 2、createElement.js
+### 5.2.2、createElement.js
 
 ```js
 
@@ -194,7 +194,7 @@ const React = {
 export default React
 ```
 
-### 3、react-dom.js
+### 5.2.3、react-dom.js
 
 ```js
 import { addEvent } from "./event"
@@ -313,7 +313,7 @@ const ReactDOM = {
 export default ReactDOM
 ```
 
-### 4、Component.js
+### 5.2.4、Component.js
 
 ```js
 import {createDOM} from './react-dom'
@@ -401,7 +401,7 @@ export default Component
 
 ```
 
-### 4、event.js
+### 5.2.5、event.js
 
  * 给真实dom添加事件处理函数
 

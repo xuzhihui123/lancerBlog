@@ -1,4 +1,4 @@
-## 1、index.js
+## 3.1、index.js
 
  * **函数式组件**
 
@@ -39,7 +39,7 @@ ReactDOM.render(<Welcome name={'hello lancer'}>
 
 ![函数组件虚拟dom](/lancerBlog/react/pn1.png)
 
-## 2、createElement.js
+## 3.2、createElement.js
 
 初步手写成这样生成虚拟dom树，此时的children可能是数组也可能是基本类型
 
@@ -72,7 +72,7 @@ ReactDOM.render(<Welcome name={'hello lancer'}>
   export default React
 ```
 
-  ## 3、react-dom.js
+  ## 3.3、react-dom.js
 
 初步写成这样，后续还会更新，render其实就是将虚拟dom转换为真实dom。**updateProps**为更新dom上的属性。
 
