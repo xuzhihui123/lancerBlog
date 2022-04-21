@@ -51,6 +51,11 @@ module.exports = {
           title: '实现类组件',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path:'day3'
+        },
+        {
+          title: '合成事件和批量更新',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path:'day4'
         }
       ],
       '/guide/vue/': [

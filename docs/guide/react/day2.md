@@ -37,7 +37,7 @@ ReactDOM.render(<Welcome name={'hello lancer'}>
 ```
 这就是上方Welcome组件的虚拟dom，可以看到type就是个函数。
 
-![/react/pn1.png](/lancerBlog/react/pn1.png)
+![函数组件虚拟dom](/lancerBlog/react/pn1.png)
 
 ## 2、createElement.js
 
