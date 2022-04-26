@@ -27,6 +27,12 @@ module.exports = {
       }, // link还可以跳转外部链接
       { text: 'Vue学习', link: '/guide/vue/', target: '_self' },
       { text: 'css注意', link: '/guide/css/', target: '_self' },
+      {
+        text: '其他',
+        items: [
+          { link: '/guide/others/vuepress/', target: '_self', text: 'vuepress自动化部署github' },
+        ]
+      },
       { text: 'my-github', link: 'https://github.com/xuzhihui123?tab=repositories', target: '_blank' },
     ],
     sidebar: {
@@ -95,6 +101,20 @@ module.exports = {
           title: '1、BFC问题',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'css1'
+        },
+      ],
+      '/guide/others/vuepress/':[
+        {
+          title: 'vuepress自动化部署',   // 一级菜单名称
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          // sidebarDepth: 1,    //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
+          // children: [
+          //   {
+          //     title:'子标题1',
+          //     path:'c1'
+          //   }
+          // ]
+          path: '/guide/others/vuepress/'
         },
       ]
     }
