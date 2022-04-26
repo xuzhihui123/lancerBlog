@@ -22,7 +22,7 @@ module.exports = {
       {
         text: 'React学习',
         items: [
-          { link: '/guide/react/', target: '_self', text: 'React基础' }
+          { link: '/guide/react/', target: '_self', text: 'React17基础' }
         ]
       }, // link还可以跳转外部链接
       { text: 'Vue学习', link: '/guide/vue/', target: '_self' },
