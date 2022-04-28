@@ -25,8 +25,15 @@ module.exports = {
           { link: '/guide/react/', target: '_self', text: 'React17基础' }
         ]
       }, // link还可以跳转外部链接
-      { text: 'Vue学习', link: '/guide/vue/', target: '_self' },
+      {
+        text: 'Vue学习',
+        items: [
+          { link: '/guide/vue/', target: '_self', text: 'Vue2基础学习' },
+          { link: '/guide/vue2Com/', target: '_self', text: 'Vue2组件' },
+        ]
+      },
       { text: 'css注意', link: '/guide/css/', target: '_self' },
+      { text: 'js学习', link: '/guide/js/', target: '_self' },
       {
         text: '其他',
         items: [
@@ -68,20 +75,30 @@ module.exports = {
           title: '5、合成事件和批量更新',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'day4'
+        },
+        {
+          title: '6、初步的完整的生命周期',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day5'
         }
       ],
       '/guide/vue/': [
         {
           title: 'Vue学习部分开始',   // 一级菜单名称
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
-          // sidebarDepth: 1,    //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
-          // children: [
-          //   {
-          //     title:'子标题1',
-          //     path:'c1'
-          //   }
-          // ]
           path: '/guide/vue/'
+        }
+      ],
+      '/guide/vue2Com/': [
+        {
+          title: 'Vue2组件学习',   // 一级菜单名称
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: '/guide/vue2Com/'
+        },
+        {
+          title: '1、虚拟滚动',   // 一级菜单名称
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'visualScroll'
         }
       ],
       '/guide/css/': [
@@ -102,6 +119,13 @@ module.exports = {
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'css1'
         },
+      ],
+      '/guide/js/':[
+        {
+          title:"js学习注意点",
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path:'/guide/js/'
+        }
       ],
       '/guide/others/vuepress/':[
         {
