@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1-1、call的实现思路 | lancer博客首页</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/lancerBlog/favicon.ico">
+    <meta name="description" content="lancer的前端学习记录">
+    
+    <link rel="preload" href="/lancerBlog/assets/css/0.styles.1a16fee6.css" as="style"><link rel="preload" href="/lancerBlog/assets/js/app.515e20d7.js" as="script"><link rel="preload" href="/lancerBlog/assets/js/2.ff00f0db.js" as="script"><link rel="preload" href="/lancerBlog/assets/js/12.61d720af.js" as="script"><link rel="prefetch" href="/lancerBlog/assets/js/10.3a93f682.js"><link rel="prefetch" href="/lancerBlog/assets/js/11.b56e63d2.js"><link rel="prefetch" href="/lancerBlog/assets/js/13.832f5631.js"><link rel="prefetch" href="/lancerBlog/assets/js/14.097fb199.js"><link rel="prefetch" href="/lancerBlog/assets/js/15.026a278e.js"><link rel="prefetch" href="/lancerBlog/assets/js/16.e243fb2a.js"><link rel="prefetch" href="/lancerBlog/assets/js/17.dd4a8a73.js"><link rel="prefetch" href="/lancerBlog/assets/js/18.80ccef51.js"><link rel="prefetch" href="/lancerBlog/assets/js/19.8675bd90.js"><link rel="prefetch" href="/lancerBlog/assets/js/20.5002de15.js"><link rel="prefetch" href="/lancerBlog/assets/js/21.a19df5d0.js"><link rel="prefetch" href="/lancerBlog/assets/js/22.0452f51a.js"><link rel="prefetch" href="/lancerBlog/assets/js/23.c939b794.js"><link rel="prefetch" href="/lancerBlog/assets/js/3.a94e3fb0.js"><link rel="prefetch" href="/lancerBlog/assets/js/4.795f3470.js"><link rel="prefetch" href="/lancerBlog/assets/js/5.c0237387.js"><link rel="prefetch" href="/lancerBlog/assets/js/6.b73a62f4.js"><link rel="prefetch" href="/lancerBlog/assets/js/7.74b34854.js"><link rel="prefetch" href="/lancerBlog/assets/js/8.4df75d8c.js"><link rel="prefetch" href="/lancerBlog/assets/js/9.a5ea7bab.js">
+    <link rel="stylesheet" href="/lancerBlog/assets/css/0.styles.1a16fee6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/lancerBlog/" class="home-link router-link-active"><img src="/lancerBlog/home.png" alt="lancer博客首页" class="logo"> <span class="site-name can-hide">lancer博客首页</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/lancerBlog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="React学习" class="dropdown-title"><span class="title">React学习</span> <span class="arrow down"></span></button> <button type="button" aria-label="React学习" class="mobile-dropdown-title"><span class="title">React学习</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/react/" class="nav-link">
+  React17基础
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue学习" class="dropdown-title"><span class="title">Vue学习</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue学习" class="mobile-dropdown-title"><span class="title">Vue学习</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/vue/" class="nav-link">
+  Vue2基础学习
+</a></li><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/vue2Com/" class="nav-link">
+  Vue2组件
+</a></li></ul></div></div><div class="nav-item"><a href="/lancerBlog/guide/css/" class="nav-link">
+  css注意
+</a></div><div class="nav-item"><a href="/lancerBlog/guide/js/" class="nav-link router-link-active">
+  js学习
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/others/vuepress/" class="nav-link">
+  vuepress自动化部署github
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/xuzhihui123?tab=repositories" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  my-github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/lancerBlog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="React学习" class="dropdown-title"><span class="title">React学习</span> <span class="arrow down"></span></button> <button type="button" aria-label="React学习" class="mobile-dropdown-title"><span class="title">React学习</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/react/" class="nav-link">
+  React17基础
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue学习" class="dropdown-title"><span class="title">Vue学习</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue学习" class="mobile-dropdown-title"><span class="title">Vue学习</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/vue/" class="nav-link">
+  Vue2基础学习
+</a></li><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/vue2Com/" class="nav-link">
+  Vue2组件
+</a></li></ul></div></div><div class="nav-item"><a href="/lancerBlog/guide/css/" class="nav-link">
+  css注意
+</a></div><div class="nav-item"><a href="/lancerBlog/guide/js/" class="nav-link router-link-active">
+  js学习
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/lancerBlog/guide/others/vuepress/" class="nav-link">
+  vuepress自动化部署github
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/xuzhihui123?tab=repositories" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  my-github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/lancerBlog/guide/js/" aria-current="page" class="sidebar-link">js学习注意点</a></li><li><a href="/lancerBlog/guide/js/js1.html" aria-current="page" class="active sidebar-link">1、call,bind,apply实现</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/lancerBlog/guide/js/js1.html#_1-1、call的实现思路" class="sidebar-link">1-1、call的实现思路</a></li><li class="sidebar-sub-header"><a href="/lancerBlog/guide/js/js1.html#_1-2、apply的实现思路" class="sidebar-link">1-2、apply的实现思路</a></li><li class="sidebar-sub-header"><a href="/lancerBlog/guide/js/js1.html#_1-3-bind的实现" class="sidebar-link">1-3 bind的实现</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="_1-1、call的实现思路"><a href="#_1-1、call的实现思路" class="header-anchor">#</a> 1-1、call的实现思路</h2> <ol><li>将函数作为要更改this绑定的对象的一个属性。也就是把函数作为call方法中第一个参数中的一个属性。</li> <li>通过 <code>对象 . 方法</code> 执行这个函数。</li> <li>返回当前函数执行后的结果。</li> <li>删除该对象上的属性。</li></ol> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">/**
+ * @description: 实现call方法
+ * @param : context this要绑定的值
+ * @param : args 除第一个参数外的参数集合
+ * @return: 函数返回值
+ */</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">myCall</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> handler<span class="token operator">=</span><span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 生成一个唯一的值，用来作为要绑定对象的属性key，储存当前调用call方法的函数</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">this</span><span class="token operator">!==</span><span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//调用者不是函数</span>
+
+        <span class="token keyword">throw</span> <span class="token keyword">this</span><span class="token operator">+</span><span class="token string">'.myCall is not a function'</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 如果第一个参数为引用类型或者null</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> context<span class="token operator">===</span><span class="token string">'object'</span><span class="token operator">||</span><span class="token keyword">typeof</span> context<span class="token operator">===</span><span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 如果为null 则this为window</span>
+        context<span class="token operator">=</span>context<span class="token operator">||</span>window<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 如果为undefined 则this绑定为window</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> context<span class="token operator">===</span><span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            context<span class="token operator">=</span>window<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 基本类型包装  1 =&gt; Number{1}</span>
+            context<span class="token operator">=</span><span class="token function">Object</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// this 为当前调用call方法的函数。</span>
+    context<span class="token punctuation">[</span>handler<span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token comment">// 执行这个函数。这时这个函数内部this绑定为cxt，储存函数执行后的返回值。</span>
+    <span class="token keyword">let</span> result<span class="token operator">=</span>context<span class="token punctuation">[</span>handler<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 删除对象上的函数</span>
+    <span class="token keyword">delete</span> context<span class="token punctuation">[</span>handler<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 返回返回值</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><h2 id="_1-2、apply的实现思路"><a href="#_1-2、apply的实现思路" class="header-anchor">#</a> 1-2、apply的实现思路</h2> <p>由于apply跟call的唯一区别只是除了第一个参数外其余参数的传递形式不一样。在实现call的基础上略作修改就可以了。</p> <p>apply参数的特点：</p> <ol><li><p>除第一个参数外，其余参数必须为数组的形式。</p></li> <li><p>如果第二个参数存在</p> <p>2.1 如果第二个参数为null或者undefined，则无效。
+2.2 如果第二个参数类型不是Object，则抛出一个异常。如果不是数组，则无效。</p></li></ol> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">/**
+ * @description: 实现apply方法
+ * @param : context this要绑定的值
+ * @param : argsArr 要传递给调用apply方法的函数的实参集合。数组形式。
+ * @return: 函数返回值
+ */</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">myApply</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span>argsArr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> handler<span class="token operator">=</span><span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 生成一个唯一的值，用来作为要绑定对象的属性key，储存当前调用call方法的函数</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">this</span><span class="token operator">!==</span><span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//调用者不是函数</span>
+
+        <span class="token keyword">throw</span> <span class="token keyword">this</span><span class="token operator">+</span><span class="token string">'.myBind is not a function'</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">let</span> args<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 如果传入的参数是不是数组，则无效</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> argsArr<span class="token operator">===</span><span class="token string">'object'</span><span class="token operator">||</span><span class="token keyword">typeof</span> context<span class="token operator">===</span><span class="token string">'function'</span><span class="token operator">||</span><span class="token keyword">typeof</span> argsArr<span class="token operator">===</span><span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        args<span class="token operator">=</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>argsArr<span class="token punctuation">)</span><span class="token operator">?</span> argsArr<span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 如果为基本类型，如果是undefined，则无效，其它类型则抛出错误。</span>
+        <span class="token keyword">throw</span> <span class="token string">'TypeError: CreateListFromArrayLike called on non-object'</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 如果第一个参数为引用类型或者null</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> context<span class="token operator">===</span><span class="token string">'object'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 如果为null 则this为window</span>
+        context<span class="token operator">=</span>context<span class="token operator">||</span>window<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 如果为undefined 则this绑定为window</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> context<span class="token operator">===</span><span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            context<span class="token operator">=</span>window<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 基本类型包装  1 =&gt; Number{1}</span>
+            context<span class="token operator">=</span><span class="token function">Object</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// this 为当前调用call方法的函数。</span>
+    context<span class="token punctuation">[</span>handler<span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token comment">// 执行这个函数。这时这个函数内部this绑定为cxt，储存函数执行后的返回值。</span>
+    <span class="token keyword">let</span> result<span class="token operator">=</span>context<span class="token punctuation">[</span>handler<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 删除对象上的函数</span>
+    <span class="token keyword">delete</span> context<span class="token punctuation">[</span>handler<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 返回返回值</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><h2 id="_1-3-bind的实现"><a href="#_1-3-bind的实现" class="header-anchor">#</a> 1-3 bind的实现</h2> <p>bind与call和apply区别还是很大的。
+先看一个例子：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'erdong'</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span>age</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token operator">=</span>age<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token operator">+</span><span class="token string">':'</span><span class="token operator">+</span>age<span class="token operator">+</span><span class="token string">'岁'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> bar<span class="token operator">=</span><span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span><span class="token string">'chen'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// erdong:18岁</span>
+
+
+<span class="token keyword">var</span> b<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">bar</span><span class="token punctuation">(</span><span class="token number">27</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined:27岁</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 27</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>综合上述例子，我们总结一下bind方法特点：</p> <p>1.调用bind方法会创建一个新函数,我们成它为绑定函数(boundF)。</p> <p>2.当我们直接调用boundF函数时，内部this被绑定为bind方法的第一个参数。</p> <p>3.当我们把这个boundF函数当做构造函数通过new关键词调用时，函数内部的this绑定为新创建的对象。(相当于bind提供的this值被忽略)。</p> <p>4.调用bind方法时，除第一个参数外的其余参数，将作为boundF的预置参数，在调用boundF函数时默认填充进boundF函数实参列表中。</p> <p>我们根据上述的bind方法的特点，一步一步实现bind方法。</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 第一步  返回一个函数</span>
+<span class="token comment">/**
+ * @description: 实现bind方法
+ * @param : context this要绑定的值
+ * @param : args 调用bind方法时，除第一个参数外的参数集合，这些参数会被预置在绑定函数的参数列表中
+ * @return: 返回一个函数
+ */</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">myBind</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 这里的this为调用bind方法的函数。</span>
+    <span class="token keyword">let</span> thisFunc<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> <span class="token function-variable function">boundF</span> <span class="token operator">=</span>  <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> boundF<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>第一步我们实现了myBind方法返回一个函数。没错就是这就是利用了闭包。</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 第二步 </span>
+<span class="token comment">/**
+ * @description: 实现bind方法
+ * @param : context this要绑定的值
+ * @param : args 调用bind方法时，除第一个参数外的参数集合，这些参数会被预置在绑定函数的参数列表中
+ * @return: 返回一个函数
+ */</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">myBind</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 这里的this为调用bind方法的函数。</span>
+    <span class="token keyword">let</span> thisFunc<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> <span class="token function-variable function">boundF</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">thisFunc</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> boundF<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>第二步：当调用boundF方法时，原函数内部this绑定为bind方法的第一个参数，这里我们利用了call来实现。</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 第三步</span>
+<span class="token comment">/**
+ * @description: 实现bind方法
+ * @param : context this要绑定的值
+ * @param : args 调用bind方法时，除第一个参数外的参数集合，这些参数会被预置在绑定函数的参数列表中
+ * @return: 返回一个函数
+ */</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">myBind</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 这里的this为调用bind方法的函数。</span>
+    <span class="token keyword">let</span> thisFunc<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token function-variable function">boundF</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> isUseNew<span class="token operator">=</span><span class="token keyword">this</span> <span class="token keyword">instanceof</span> <span class="token class-name">boundF</span><span class="token punctuation">;</span>
+        <span class="token function">thisFunc</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>isUseNew<span class="token operator">?</span> <span class="token keyword">this</span><span class="token operator">:</span>context<span class="token punctuation">,</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> boundF<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>第三部：先判断boundF是否通过new调用，也就是判断boundF内部的this是否为boundF的一个实例。如果是通过new调用，boundF函数的内部this绑定为当前新创建的对象，因此调用call方法时把当前新创建的对象当做第一个参数传递。</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 第四步</span>
+<span class="token comment">/**
+ * @description: 实现bind方法
+ * @param : context this要绑定的值
+ * @param : args 调用bind方法时，除第一个参数外的参数集合，这些参数会被预置在绑定函数的参数列表中
+ * @return: 返回一个函数
+ */</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">myBind</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 这里的this为调用bind方法的函数。</span>
+    <span class="token keyword">let</span> thisFunc<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token function-variable function">boundF</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> boundFAgrs<span class="token operator">=</span>arguments<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> totalAgrs<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">...</span>args<span class="token punctuation">,</span><span class="token operator">...</span>arguments<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> isUseNew<span class="token operator">=</span><span class="token keyword">this</span> <span class="token keyword">instanceof</span> <span class="token class-name">boundF</span><span class="token punctuation">;</span>
+        <span class="token function">thisFunc</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>isUseNew<span class="token operator">?</span> <span class="token keyword">this</span><span class="token operator">:</span>context<span class="token punctuation">,</span><span class="token operator">...</span>totalAgrs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> boundF<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>第四部：通过闭包的特性我们知道，boundF函数可以访问到外部的args变量，将它与boundF函数中的参数合并。然后当做调用原函数的参数。</p> <p>到此我们简易版的bind已经显示完毕，下面测试：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token class-name">Function</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">myBind</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 这里的this为调用bind方法的函数。</span>
+    <span class="token keyword">let</span> thisFunc<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token function-variable function">boundF</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> boundFAgrs<span class="token operator">=</span>arguments<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> totalAgrs<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">...</span>args<span class="token punctuation">,</span><span class="token operator">...</span>arguments<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> isUseNew<span class="token operator">=</span><span class="token keyword">this</span> <span class="token keyword">instanceof</span> <span class="token class-name">boundF</span><span class="token punctuation">;</span>
+        <span class="token function">thisFunc</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>isUseNew<span class="token operator">?</span> <span class="token keyword">this</span><span class="token operator">:</span>context<span class="token punctuation">,</span><span class="token operator">...</span>totalAgrs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> boundF<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'erdong'</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span>age</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token operator">=</span>age<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token operator">+</span><span class="token string">':'</span><span class="token operator">+</span>age<span class="token operator">+</span><span class="token string">'岁'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> bar<span class="token operator">=</span>foo<span class="token punctuation">.</span><span class="token function">myBind</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span><span class="token string">'chen'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// erdong:18岁</span>
+
+
+<span class="token keyword">var</span> b<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">bar</span><span class="token punctuation">(</span><span class="token number">27</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined:27岁</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 27</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">5/5/2022, 3:19:54 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/lancerBlog/guide/js/" class="prev router-link-active">
+        js学习注意点
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/lancerBlog/assets/js/app.515e20d7.js" defer></script><script src="/lancerBlog/assets/js/2.ff00f0db.js" defer></script><script src="/lancerBlog/assets/js/12.61d720af.js" defer></script>
+  </body>
+</html>

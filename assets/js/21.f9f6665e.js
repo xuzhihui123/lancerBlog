@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{437:function(t,e,n){"use strict";n.r(e);var s=n(62),l=Object(s.a)({},(function(){var t=this.$createElement,e=this._self._c||t;return e("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[e("p",[this._v("记录一些遇到的可复用的vue2组件。")])])}),[],!1,null,null,null);e.default=l.exports}}]);
