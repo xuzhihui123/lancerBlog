@@ -125,6 +125,11 @@ module.exports = {
           title:"js学习注意点",
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path:'/guide/js/'
+        },
+        {
+          title:"1、call,bind,apply实现",
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path:'js1'
         }
       ],
       '/guide/others/vuepress/':[
