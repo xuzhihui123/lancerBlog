@@ -130,6 +130,16 @@ module.exports = {
           title:"1、call,bind,apply实现",
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path:'js1'
+        },
+        {
+          title:"2、WeakMap",
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path:'js2'
+        },
+        {
+          title:"3、compose、curring、cloneDeep、reduce",
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path:'js3'
         }
       ],
       '/guide/others/vuepress/':[
