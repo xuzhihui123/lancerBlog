@@ -80,6 +80,41 @@ module.exports = {
           title: '6、初步的完整的生命周期',
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'day5'
+        },
+        {
+          title: '7、新增getDerivedStateFromProps',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day6'
+        },
+        {
+          title: '8、createRef和getSnapshotBeforeUpdate',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day7'
+        },
+        {
+          title: '9、createContext的使用',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day8'
+        },
+        {
+          title: '10、高阶组件之属性代理',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day9'
+        },
+        {
+          title: '11、高阶组件之反向继承',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day10'
+        },
+        {
+          title: '12、组件传属性为函数',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day11'
+        },
+        {
+          title: '13、组件传儿子',
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          path: 'day12'
         }
       ],
       '/guide/vue/': [
