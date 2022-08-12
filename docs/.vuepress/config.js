@@ -30,6 +30,7 @@ module.exports = {
         items: [
           { link: '/guide/vue/', target: '_self', text: 'Vue2基础学习' },
           { link: '/guide/vue2Com/', target: '_self', text: 'Vue2组件' },
+          {link:'/guide/nuxt3/',target:"_self",text:"nuxt3"}
         ]
       },
       { text: 'css注意', link: '/guide/css/', target: '_self' },
@@ -134,6 +135,18 @@ module.exports = {
           title: '1、虚拟滚动',   // 一级菜单名称
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           path: 'visualScroll'
+        }
+      ],
+      '/guide/nuxt3/':[
+        {
+          title:"nuxt3学习",
+          collapsable:false,
+          path:"/guide/nuxt3/"
+        },
+        {
+          title:"1、nuxt3搭建细节",
+          collapsable:false,
+          path:"detail"
         }
       ],
       '/guide/css/': [
