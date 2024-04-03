@@ -39,6 +39,7 @@ module.exports = {
         text: '其他',
         items: [
           { link: '/guide/others/vuepress/', target: '_self', text: 'vuepress自动化部署github' },
+          { link: '/guide/others/canvas/', target: '_self', text: 'canvas相关' },
         ]
       },
       { text: 'my-github', link: 'https://github.com/xuzhihui123?tab=repositories', target: '_blank' },
@@ -202,7 +203,21 @@ module.exports = {
           //   }
           // ]
           path: '/guide/others/vuepress/'
-        },
+        }
+      ],
+      '/guide/others/canvas/':[
+        {
+          title: 'canvas根据点缩放、移动效果',   // 一级菜单名称
+          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          // sidebarDepth: 1,    //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
+          // children: [
+          //   {
+          //     title:'子标题1',
+          //     path:'c1'
+          //   }
+          // ]
+          path: '/guide/others/canvas/'
+        }
       ]
     }
   }
